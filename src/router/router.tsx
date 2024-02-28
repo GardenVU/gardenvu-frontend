@@ -5,6 +5,8 @@ import {
 } from "react-router-dom";
 import App from "../layout/App";
 import Dashboard from "../pages/Dashboard";
+import History from "../pages/History";
+import Settings from "../pages/Settings";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +15,8 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Navigate to="/dashboard" /> },
       { path: "/dashboard", element: <Dashboard /> },
+      { path: "/history", element: <History /> },
+      { path: "/settings", element: <Settings /> },
     ],
   },
   {
