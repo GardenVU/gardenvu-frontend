@@ -11,27 +11,27 @@ interface GraphTooltipProps {
 }
 
 const GraphTooltip = ({ label, payload }: GraphTooltipProps) => {
-    if (!payload) return null;
-    return (
-        <Paper px="md" py="sm" withBorder shadow="md" radius="md">
-            <Text fw={500} mb={5}>
-                {new Date(label).toDateString()}
-            </Text>
-            <Text mb={5}>{new Date(label).toLocaleTimeString()}</Text>
-            {/*eslint-disable-next-line @typescript-eslint/no-explicit-any*/}
-            {payload.map((item: any) => (
-                <Text key={item.name} c={item.color} fz="sm">
-                    {
-                        SensorDataTitle[
-                            item.name.toUpperCase() as keyof typeof SensorDataTitle
-                        ]
-                    }
-                    :{" "}
-                    {`${item.value}${["WATER_LEVEL", "TDS"].includes(item.name.toUpperCase()) ? " " : ""}${SensorDataUnit[item.name.toUpperCase() as keyof typeof SensorDataTitle]}`}
-                </Text>
-            ))}
-        </Paper>
-    );
+  if (!payload) return null;
+  return (
+    <Paper px="md" py="sm" withBorder shadow="md" radius="md">
+      <Text fw={500} mb={5}>
+        {new Date(label).toDateString()}
+      </Text>
+      <Text mb={5}>{new Date(label).toLocaleTimeString()}</Text>
+      {/*eslint-disable-next-line @typescript-eslint/no-explicit-any*/}
+      {payload.map((item: any) => (
+        <Text key={item.name} c={item.color} fz="sm">
+          {
+            SensorDataTitle[
+              item.name.toUpperCase() as keyof typeof SensorDataTitle
+            ]
+          }
+          :{" "}
+          {`${item.value}${["WATER_LEVEL", "TDS"].includes(item.name.toUpperCase()) ? " " : ""}${SensorDataUnit[item.name.toUpperCase() as keyof typeof SensorDataTitle]}`}
+        </Text>
+      ))}
+    </Paper>
+  );
 };
 
 export default GraphTooltip;
