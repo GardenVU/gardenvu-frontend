@@ -56,6 +56,7 @@ const History = () => {
           maxDate={new Date()}
           disabled={!selectedPlot}
           firstDayOfWeek={0}
+          allowSingleDateInRange
         />
       </Group>
       {dateRange[0] && dateRange[1] && selectedPlot && (
