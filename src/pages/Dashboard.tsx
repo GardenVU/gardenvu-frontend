@@ -64,7 +64,7 @@ const Dashboard = () => {
                     </Text>
                   }
                 >
-                  {`${plot.data[plot.data.length - 1].tds}${SensorDataUnit.TDS}`}
+                  {`${plot.data[plot.data.length - 1].tds} ${SensorDataUnit.TDS}`}
                 </List.Item>
                 <List.Item
                   icon={
@@ -73,7 +73,7 @@ const Dashboard = () => {
                     </Text>
                   }
                 >
-                  {`${plot.data[plot.data.length - 1].waterLevel}${SensorDataUnit.WATERLEVEL}`}
+                  {`${plot.data[plot.data.length - 1].waterLevel} ${SensorDataUnit.WATERLEVEL}`}
                 </List.Item>
               </List>
             </Stack>
