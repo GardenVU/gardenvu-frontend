@@ -11,13 +11,15 @@ const plotsData = [
 ];
 
 const Dashboard = () => {
+  /** States and Context **/
   const [selectedPlot, setSelectedPlot] = useState<number>(0);
 
+  /** Render **/
   return (
     <div>
-      <GraphPanel data={plotsData[selectedPlot]} />
+      <GraphPanel data={plotsData[selectedPlot].data} />
       <SimpleGrid cols={plotsData.length}>
-        {plotsData.map((data, index) => (
+        {plotsData.map((plot, index) => (
           <Card
             key={index}
             shadow="sm"
@@ -40,7 +42,7 @@ const Dashboard = () => {
                     </Text>
                   }
                 >
-                  {data[data.length - 1].temperature}
+                  {plot.data[plot.data.length - 1].temperature}
                 </List.Item>
                 <List.Item
                   icon={
@@ -49,7 +51,7 @@ const Dashboard = () => {
                     </Text>
                   }
                 >
-                  {data[data.length - 1].pH}
+                  {plot.data[plot.data.length - 1].pH}
                 </List.Item>
                 <List.Item
                   icon={
@@ -58,7 +60,7 @@ const Dashboard = () => {
                     </Text>
                   }
                 >
-                  {data[data.length - 1].tds}
+                  {plot.data[plot.data.length - 1].tds}
                 </List.Item>
                 <List.Item
                   icon={
@@ -67,7 +69,7 @@ const Dashboard = () => {
                     </Text>
                   }
                 >
-                  {data[data.length - 1].waterLevel}
+                  {plot.data[plot.data.length - 1].waterLevel}
                 </List.Item>
               </List>
             </Stack>

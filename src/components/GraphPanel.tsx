@@ -13,12 +13,13 @@ interface GraphPanelProps {
 }
 
 const GraphPanel = ({ data }: GraphPanelProps) => {
+  /** States and Context **/
   const [selected, setSelected] = useState<SensorDataName>(
     SensorDataName.TEMPERATURE,
   );
 
+  /** Render **/
   return (
-
     <Grid justify="center" align="center">
       <Grid.Col span="content">
         <Stack>

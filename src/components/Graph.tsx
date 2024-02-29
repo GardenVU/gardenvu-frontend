@@ -3,8 +3,10 @@ import {
   SensorData,
   SensorDataColors,
   SensorDataName,
+  SensorDataTitle,
 } from "../interfaces/SensorData.interface";
 import { Group, Title } from "@mantine/core";
+import GraphTooltip from "./GraphTooltip";
 
 interface GraphProps {
   data: SensorData[];
@@ -13,18 +15,12 @@ interface GraphProps {
 }
 
 const Graph = ({ data, value, dataKey }: GraphProps) => {
-  const title =
-    value === "temperature"
-      ? "Temperature"
-      : value === "pH"
-        ? "pH"
-        : value === "tds"
-          ? "TDS"
-          : "Water Level";
-
+  /** Render **/
   return (
     <Group>
-      <Title order={3}>{title}</Title>
+      <Title order={3}>
+        {SensorDataTitle[value.toUpperCase() as keyof typeof SensorDataTitle]}
+      </Title>
       <LineChart
         h={225}
         data={data}
@@ -47,6 +43,11 @@ const Graph = ({ data, value, dataKey }: GraphProps) => {
           },
         }}
         curveType="step"
+        tooltipProps={{
+          content: ({ label, payload }) => (
+            <GraphTooltip label={label} payload={payload} />
+          ),
+        }}
       />
     </Group>
   );
