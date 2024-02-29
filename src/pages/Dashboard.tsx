@@ -11,6 +11,7 @@ const plotsData = [
   createTestPlotData(),
   createTestPlotData(),
   createTestPlotData(),
+  createTestPlotData(),
 ];
 
 const Dashboard = () => {
@@ -21,7 +22,7 @@ const Dashboard = () => {
   return (
     <div>
       <GraphPanel data={plotsData[selectedPlot].data} />
-      <SimpleGrid cols={plotsData.length}>
+      <SimpleGrid cols={4}>
         {plotsData.map((plot, index) => (
           <Card
             key={index}
