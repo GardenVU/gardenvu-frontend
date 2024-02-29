@@ -1,5 +1,8 @@
 import { Paper, Text } from "@mantine/core";
-import { SensorDataTitle } from "../interfaces/SensorData.interface";
+import {
+  SensorDataTitle,
+  SensorDataUnit,
+} from "../interfaces/SensorData.interface";
 
 interface GraphTooltipProps {
   label: string;
@@ -23,7 +26,8 @@ const GraphTooltip = ({ label, payload }: GraphTooltipProps) => {
               item.name.toUpperCase() as keyof typeof SensorDataTitle
             ]
           }
-          : {item.value}
+          :{" "}
+          {`${item.value}${SensorDataUnit[item.name.toUpperCase() as keyof typeof SensorDataTitle]}`}
         </Text>
       ))}
     </Paper>

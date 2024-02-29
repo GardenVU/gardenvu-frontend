@@ -20,7 +20,7 @@ const App = () => {
       <AppShell.Header withBorder>
         <Group ml={20} mt={10}>
           <Title order={1}>GardenVU</Title>
-          <Group>
+          <Group ml={20}>
             {tabs.map((tab) => (
               <Text
                 key={tab.link}

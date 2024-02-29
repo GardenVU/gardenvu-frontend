@@ -15,6 +15,13 @@ export enum SensorDataName {
   TIMESTAMP = "timestamp",
 }
 
+export enum SensorDataUnit {
+  TEMPERATURE = "°F",
+  PH = "",
+  TDS = "ppm",
+  WATERLEVEL = "cm",
+}
+
 export enum SensorDataTitle {
   TEMPERATURE = "Temperature",
   PH = "pH",

@@ -2,7 +2,10 @@ import { Button, Card, List, SimpleGrid, Stack, Text } from "@mantine/core";
 import { createTestPlotData } from "../data/test-data";
 import GraphPanel from "../components/GraphPanel";
 import { useState } from "react";
-import { SensorDataTitle } from "../interfaces/SensorData.interface";
+import {
+  SensorDataTitle,
+  SensorDataUnit,
+} from "../interfaces/SensorData.interface";
 
 const plotsData = [
   createTestPlotData(),
@@ -42,7 +45,7 @@ const Dashboard = () => {
                     </Text>
                   }
                 >
-                  {plot.data[plot.data.length - 1].temperature}
+                  {`${plot.data[plot.data.length - 1].temperature}${SensorDataUnit.TEMPERATURE}`}
                 </List.Item>
                 <List.Item
                   icon={
@@ -51,7 +54,7 @@ const Dashboard = () => {
                     </Text>
                   }
                 >
-                  {plot.data[plot.data.length - 1].pH}
+                  {`${plot.data[plot.data.length - 1].pH}${SensorDataUnit.PH}`}
                 </List.Item>
                 <List.Item
                   icon={
@@ -60,7 +63,7 @@ const Dashboard = () => {
                     </Text>
                   }
                 >
-                  {plot.data[plot.data.length - 1].tds}
+                  {`${plot.data[plot.data.length - 1].tds}${SensorDataUnit.TDS}`}
                 </List.Item>
                 <List.Item
                   icon={
@@ -69,7 +72,7 @@ const Dashboard = () => {
                     </Text>
                   }
                 >
-                  {plot.data[plot.data.length - 1].waterLevel}
+                  {`${plot.data[plot.data.length - 1].waterLevel}${SensorDataUnit.WATERLEVEL}`}
                 </List.Item>
               </List>
             </Stack>

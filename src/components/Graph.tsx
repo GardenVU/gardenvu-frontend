@@ -4,6 +4,7 @@ import {
   SensorDataColors,
   SensorDataName,
   SensorDataTitle,
+  SensorDataUnit,
 } from "../interfaces/SensorData.interface";
 import { Group, Title } from "@mantine/core";
 import GraphTooltip from "./GraphTooltip";
@@ -19,7 +20,11 @@ const Graph = ({ data, value, dataKey }: GraphProps) => {
   return (
     <Group>
       <Title order={3}>
-        {SensorDataTitle[value.toUpperCase() as keyof typeof SensorDataTitle]}
+        {value === SensorDataName.PH
+          ? SensorDataTitle[value.toUpperCase() as keyof typeof SensorDataTitle]
+          : `${SensorDataTitle[value.toUpperCase() as keyof typeof SensorDataTitle]} (${
+              SensorDataUnit[value.toUpperCase() as keyof typeof SensorDataUnit]
+            })`}
       </Title>
       <LineChart
         h={225}
