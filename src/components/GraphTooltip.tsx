@@ -11,6 +11,7 @@ interface GraphTooltipProps {
 }
 
 const GraphTooltip = ({ label, payload }: GraphTooltipProps) => {
+  /** Render **/
   if (!payload) return null;
   return (
     <Paper px="md" py="sm" withBorder shadow="md" radius="md">

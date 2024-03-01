@@ -18,7 +18,7 @@ interface GraphProps {
 const Graph = ({ data, value, dataKey }: GraphProps) => {
   /** Render **/
   return (
-    <Group>
+    <Group gap="xs">
       <Title order={3}>
         {value === SensorDataName.PH
           ? SensorDataTitle[value.toUpperCase() as keyof typeof SensorDataTitle]
@@ -49,6 +49,7 @@ const Graph = ({ data, value, dataKey }: GraphProps) => {
         }}
         curveType="step"
         tooltipProps={{
+          //eslint-disable-next-line @typescript-eslint/no-explicit-any
           content: ({ label, payload }) => (
             <GraphTooltip label={label} payload={payload} />
           ),

@@ -7,8 +7,8 @@ export const createTestData = (): SensorData => {
     _id: faker.string.uuid(),
     temperature: faker.number.int({ min: 0, max: 100 }),
     pH: faker.number.float({ min: 0, max: 14, multipleOf: 0.1 }),
-    tds: faker.number.int({ min: 0, max: 1000 }),
-    waterLevel: faker.number.int({ min: 0, max: 100 }),
+    tds: faker.number.int({ min: 250, max: 1000 }),
+    waterLevel: faker.number.int({ min: 0, max: 50 }),
     timestamp: faker.date.recent().toISOString(),
   };
 };

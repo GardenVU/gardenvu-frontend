@@ -31,7 +31,7 @@ export enum SensorDataTitle {
 
 export enum SensorDataColors {
   TEMPERATURE = "blue",
-  PH = "green",
+  PH = "pink",
   TDS = "orange",
   WATERLEVEL = "purple",
   DEFAULT = "gray",
