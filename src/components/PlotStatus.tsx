@@ -19,7 +19,7 @@ import {
   tdsRange,
   waterLevelRange,
   SensorDateRangeColor,
-} from "../utils/sensorDataRanges";
+} from "../utils/sensorDataRanges.util";
 import { IconCircle } from "@tabler/icons-react";
 
 interface PlotStatusProps {
