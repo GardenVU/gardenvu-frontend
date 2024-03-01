@@ -34,66 +34,41 @@ const PlotStatus = ({
   onPlotSelect,
 }: PlotStatusProps) => {
   /** Render **/
-  const getTemperatureColor = (temperature: number) => {
-    if (
-      temperature >= temperatureRange.good.min &&
-      temperature <= temperatureRange.good.max
-    ) {
+  const getColorByRange = (
+    value: number,
+    range: {
+      good: { min: number; max: number };
+      warn: { min: number; max: number }[];
+    },
+  ) => {
+    if (value >= range.good.min && value <= range.good.max) {
       return SensorDateRangeColor.GOOD;
     } else if (
-      (temperature >= temperatureRange.warn[0].min &&
-        temperature <= temperatureRange.warn[0].max) ||
-      (temperature >= temperatureRange.warn[1].min &&
-        temperature <= temperatureRange.warn[1].max)
+      range.warn.some((warn) => value >= warn.min && value <= warn.max)
     ) {
       return SensorDateRangeColor.WARN;
-    } else {
-      return SensorDateRangeColor.DANGER;
     }
+    return SensorDateRangeColor.DANGER;
+  };
+
+  const getTemperatureColor = (temperature: number) => {
+    const range = { good: temperatureRange.good, warn: temperatureRange.warn };
+    return getColorByRange(temperature, range);
   };
 
   const getPHColor = (ph: number) => {
-    if (ph >= phRange.good.min && ph <= phRange.good.max) {
-      return SensorDateRangeColor.GOOD;
-    } else if (
-      (ph >= phRange.warn[0].min && ph <= phRange.warn[0].max) ||
-      (ph >= phRange.warn[1].min && ph <= phRange.warn[1].max)
-    ) {
-      return SensorDateRangeColor.WARN;
-    } else {
-      return SensorDateRangeColor.DANGER;
-    }
+    const range = { good: phRange.good, warn: phRange.warn };
+    return getColorByRange(ph, range);
   };
 
   const getTDSColor = (tds: number) => {
-    if (tds >= tdsRange.good.min && tds <= tdsRange.good.max) {
-      return SensorDateRangeColor.GOOD;
-    } else if (
-      (tds >= tdsRange.warn[0].min && tds <= tdsRange.warn[0].max) ||
-      (tds >= tdsRange.warn[1].min && tds <= tdsRange.warn[1].max)
-    ) {
-      return SensorDateRangeColor.WARN;
-    } else {
-      return SensorDateRangeColor.DANGER;
-    }
+    const range = { good: tdsRange.good, warn: tdsRange.warn };
+    return getColorByRange(tds, range);
   };
 
   const getWaterLevelColor = (waterLevel: number) => {
-    if (
-      waterLevel >= waterLevelRange.good.min &&
-      waterLevel <= waterLevelRange.good.max
-    ) {
-      return SensorDateRangeColor.GOOD;
-    } else if (
-      (waterLevel >= waterLevelRange.warn[0].min &&
-        waterLevel <= waterLevelRange.warn[0].max) ||
-      (waterLevel >= waterLevelRange.warn[1].min &&
-        waterLevel <= waterLevelRange.warn[1].max)
-    ) {
-      return SensorDateRangeColor.WARN;
-    } else {
-      return SensorDateRangeColor.DANGER;
-    }
+    const range = { good: waterLevelRange.good, warn: waterLevelRange.warn };
+    return getColorByRange(waterLevel, range);
   };
 
   return (
@@ -101,7 +76,7 @@ const PlotStatus = ({
       {plotsData.map((plot, index) => (
         <Card
           key={index}
-          shadow="sm"
+          shadow="md"
           radius="md"
           style={{ textAlign: "center" }}
           padding="xs"
@@ -115,82 +90,52 @@ const PlotStatus = ({
               Plot {index + 1}
             </Button>
             <List style={{ textAlign: "left" }}>
-              <List.Item
-                icon={
-                  <Group gap="xs">
-                    <ThemeIcon
-                      color={getTemperatureColor(
-                        plot.data[plot.data.length - 1].temperature,
-                      )}
-                      size={12}
-                      radius="xl"
-                    >
-                      <IconCircle />
-                    </ThemeIcon>
-                    <Text size="md" fw={500}>
-                      {SensorDataTitle.TEMPERATURE}
-                    </Text>
-                  </Group>
-                }
-              >
-                {`${plot.data[plot.data.length - 1].temperature}${SensorDataUnit.TEMPERATURE}`}
-              </List.Item>
-              <List.Item
-                icon={
-                  <Group gap="xs">
-                    <ThemeIcon
-                      color={getPHColor(plot.data[plot.data.length - 1].pH)}
-                      size={12}
-                      radius="xl"
-                    >
-                      <IconCircle />
-                    </ThemeIcon>
-                    <Text size="md" fw={500}>
-                      {SensorDataTitle.PH}
-                    </Text>
-                  </Group>
-                }
-              >
-                {`${plot.data[plot.data.length - 1].pH}`}
-              </List.Item>
-              <List.Item
-                icon={
-                  <Group gap="xs">
-                    <ThemeIcon
-                      color={getTDSColor(plot.data[plot.data.length - 1].tds)}
-                      size={12}
-                      radius="xl"
-                    >
-                      <IconCircle />
-                    </ThemeIcon>
-                    <Text size="md" fw={500}>
-                      {SensorDataTitle.TDS}
-                    </Text>
-                  </Group>
-                }
-              >
-                {`${plot.data[plot.data.length - 1].tds} ${SensorDataUnit.TDS}`}
-              </List.Item>
-              <List.Item
-                icon={
-                  <Group gap="xs">
-                    <ThemeIcon
-                      color={getWaterLevelColor(
-                        plot.data[plot.data.length - 1].waterLevel,
-                      )}
-                      size={12}
-                      radius="xl"
-                    >
-                      <IconCircle />
-                    </ThemeIcon>
-                    <Text size="md" fw={500}>
-                      {SensorDataTitle.WATERLEVEL}
-                    </Text>
-                  </Group>
-                }
-              >
-                {`${plot.data[plot.data.length - 1].waterLevel} ${SensorDataUnit.WATERLEVEL}`}
-              </List.Item>
+              {[
+                {
+                  title: SensorDataTitle.TEMPERATURE,
+                  value: plot.data[plot.data.length - 1].temperature,
+                  unit: SensorDataUnit.TEMPERATURE,
+                  getColor: getTemperatureColor,
+                },
+                {
+                  title: SensorDataTitle.PH,
+                  value: plot.data[plot.data.length - 1].pH,
+                  unit: "",
+                  getColor: getPHColor,
+                },
+                {
+                  title: SensorDataTitle.TDS,
+                  value: plot.data[plot.data.length - 1].tds,
+                  unit: SensorDataUnit.TDS,
+                  getColor: getTDSColor,
+                },
+                {
+                  title: SensorDataTitle.WATERLEVEL,
+                  value: plot.data[plot.data.length - 1].waterLevel,
+                  unit: SensorDataUnit.WATERLEVEL,
+                  getColor: getWaterLevelColor,
+                },
+              ].map((sensorData, i) => (
+                <List.Item
+                  key={i}
+                  icon={
+                    <Group gap="xs">
+                      <ThemeIcon
+                        color={sensorData.getColor(sensorData.value)}
+                        size={12}
+                        radius="xl"
+                      >
+                        <IconCircle />
+                      </ThemeIcon>
+                      <Text size="md" fw={500}>
+                        {sensorData.title}
+                      </Text>
+                    </Group>
+                  }
+                >
+                  {`${sensorData.value}${sensorData.title === SensorDataTitle.TEMPERATURE ? sensorData.unit : ` ${sensorData.unit}`}`}
+                </List.Item>
+              ))}
             </List>
           </Stack>
         </Card>

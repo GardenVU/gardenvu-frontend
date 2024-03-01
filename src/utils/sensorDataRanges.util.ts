@@ -4,10 +4,6 @@ export const temperatureRange = {
     { min: 65, max: 68 },
     { min: 72, max: 75 },
   ],
-  danger: [
-    { min: Number.MIN_SAFE_INTEGER, max: 65 },
-    { min: 75, max: Number.MAX_SAFE_INTEGER },
-  ],
 };
 
 export const phRange = {
@@ -15,10 +11,6 @@ export const phRange = {
   warn: [
     { min: 6, max: 6.5 },
     { min: 7.5, max: 8 },
-  ],
-  danger: [
-    { min: Number.MIN_SAFE_INTEGER, max: 6 },
-    { min: 8, max: Number.MAX_SAFE_INTEGER },
   ],
 };
 
@@ -28,10 +20,6 @@ export const tdsRange = {
     { min: 200, max: 300 },
     { min: 500, max: 600 },
   ],
-  danger: [
-    { min: Number.MIN_SAFE_INTEGER, max: 200 },
-    { min: 600, max: Number.MAX_SAFE_INTEGER },
-  ],
 };
 
 export const waterLevelRange = {
@@ -39,10 +27,6 @@ export const waterLevelRange = {
   warn: [
     { min: 5, max: 10 },
     { min: 15, max: 20 },
-  ],
-  danger: [
-    { min: Number.MIN_SAFE_INTEGER, max: 5 },
-    { min: 20, max: Number.MAX_SAFE_INTEGER },
   ],
 };
 

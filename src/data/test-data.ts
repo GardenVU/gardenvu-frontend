@@ -17,7 +17,7 @@ export const createTestPlotData = (): Plot => {
   return {
     _id: faker.string.uuid(),
     name: faker.word.adjective() + " plot",
-    data: Array.from({ length: 10 }, () => createTestData()),
+    data: Array.from({ length: 20 }, () => createTestData()),
     createdAt: faker.date
       .recent({ days: faker.number.int({ min: 5, max: 10 }) })
       .toISOString(),
