@@ -1,15 +1,9 @@
 import { Group, Select } from "@mantine/core";
 import { Plot } from "../interfaces/Plot.interface";
 import { useState } from "react";
-import { createTestPlotData } from "../data/test-data";
+import { testPlotsData } from "../data/test-data";
 import { DatePickerInput } from "@mantine/dates";
 import GraphPanel from "../components/GraphPanel";
-
-const plotsData = [
-  createTestPlotData(),
-  createTestPlotData(),
-  createTestPlotData(),
-];
 
 const History = () => {
   /** States and Context **/
@@ -20,7 +14,7 @@ const History = () => {
   ]);
 
   /** Render **/
-  const plotOptions = plotsData.map((plot, index) => ({
+  const plotOptions = testPlotsData.map((plot, index) => ({
     value: plot._id,
     label: `Plot ${index + 1}`,
   }));
@@ -36,7 +30,7 @@ const History = () => {
           value={selectedPlot?._id}
           onChange={(value) => {
             setSelectedPlot(
-              plotsData.find((plot) => plot._id === value) || null,
+              testPlotsData.find((plot) => plot._id === value) || null,
             );
           }}
           clearable

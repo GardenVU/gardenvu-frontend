@@ -1,14 +1,7 @@
-import { createTestPlotData } from "../data/test-data";
+import { testPlotsData } from "../data/test-data";
 import GraphPanel from "../components/GraphPanel";
 import { useState } from "react";
 import PlotStatus from "../components/PlotStatus";
-
-const plotsData = [
-  createTestPlotData(),
-  createTestPlotData(),
-  createTestPlotData(),
-  createTestPlotData(),
-];
 
 const Dashboard = () => {
   /** States and Context **/
@@ -17,9 +10,9 @@ const Dashboard = () => {
   /** Render **/
   return (
     <div>
-      <GraphPanel data={plotsData[selectedPlot].data} />
+      <GraphPanel data={testPlotsData[selectedPlot].data} />
       <PlotStatus
-        plotsData={plotsData}
+        plotsData={testPlotsData}
         selectedPlot={selectedPlot}
         onPlotSelect={setSelectedPlot}
       />

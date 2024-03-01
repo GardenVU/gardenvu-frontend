@@ -23,3 +23,7 @@ export const createTestPlotData = (): Plot => {
       .toISOString(),
   };
 };
+
+export const testPlotsData: Plot[] = Array.from({ length: 4 }, () =>
+  createTestPlotData(),
+);
