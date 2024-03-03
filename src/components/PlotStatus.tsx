@@ -7,6 +7,7 @@ import {
   Text,
   ThemeIcon,
   Group,
+  Autocomplete,
 } from "@mantine/core";
 import { Plot } from "../interfaces/Plot.interface";
 import {
@@ -21,6 +22,7 @@ import {
   SensorDateRangeColor,
 } from "../utils/sensorDataRanges.util";
 import { IconCircle } from "@tabler/icons-react";
+import { useState } from "react";
 
 interface PlotStatusProps {
   plotsData: Plot[];
@@ -33,7 +35,20 @@ const PlotStatus = ({
   selectedPlot,
   onPlotSelect,
 }: PlotStatusProps) => {
+  /** States and Context **/
+  const [search, setSearch] = useState<string>("");
+  const [filteredPlots, setFilteredPlots] = useState<Plot[]>(plotsData);
+
   /** Render **/
+  const filterPlots = (search: string) => {
+    setSearch(search);
+    setFilteredPlots(
+      plotsData.filter((plot) =>
+        plot.name.toLowerCase().includes(search.toLowerCase()),
+      ),
+    );
+  };
+
   const getColorByRange = (
     value: number,
     range: {
@@ -72,75 +87,84 @@ const PlotStatus = ({
   };
 
   return (
-    <SimpleGrid cols={4}>
-      {plotsData.map((plot, index) => (
-        <Card
-          key={index}
-          shadow="md"
-          radius="md"
-          style={{ textAlign: "center" }}
-          padding="xs"
-        >
-          <Stack gap="xs" justify="flex-start">
-            <Button
-              key={index}
-              onClick={() => onPlotSelect(index)}
-              color={selectedPlot === index ? "black" : "gray"}
-            >
-              Plot {index + 1}
-            </Button>
-            <List style={{ textAlign: "left" }}>
-              {[
-                {
-                  title: SensorDataTitle.TEMPERATURE,
-                  value: plot.data[plot.data.length - 1].temperature,
-                  unit: SensorDataUnit.TEMPERATURE,
-                  getColor: getTemperatureColor,
-                },
-                {
-                  title: SensorDataTitle.PH,
-                  value: plot.data[plot.data.length - 1].pH,
-                  unit: "",
-                  getColor: getPHColor,
-                },
-                {
-                  title: SensorDataTitle.TDS,
-                  value: plot.data[plot.data.length - 1].tds,
-                  unit: SensorDataUnit.TDS,
-                  getColor: getTDSColor,
-                },
-                {
-                  title: SensorDataTitle.WATERLEVEL,
-                  value: plot.data[plot.data.length - 1].waterLevel,
-                  unit: SensorDataUnit.WATERLEVEL,
-                  getColor: getWaterLevelColor,
-                },
-              ].map((sensorData, i) => (
-                <List.Item
-                  key={i}
-                  icon={
-                    <Group gap="xs">
-                      <ThemeIcon
-                        color={sensorData.getColor(sensorData.value)}
-                        size={12}
-                        radius="xl"
-                      >
-                        <IconCircle />
-                      </ThemeIcon>
-                      <Text size="md" fw={500}>
-                        {sensorData.title}
-                      </Text>
-                    </Group>
-                  }
-                >
-                  {`${sensorData.value}${sensorData.title === SensorDataTitle.TEMPERATURE ? sensorData.unit : ` ${sensorData.unit}`}`}
-                </List.Item>
-              ))}
-            </List>
-          </Stack>
-        </Card>
-      ))}
-    </SimpleGrid>
+    <>
+      <Autocomplete
+        data={plotsData.map((plot) => plot.name)}
+        value={search}
+        onChange={filterPlots}
+        placeholder="Search plots"
+        style={{ marginBottom: "0.5rem" }}
+      />
+      <SimpleGrid cols={4} spacing="xs" verticalSpacing="xs">
+        {filteredPlots.map((plot, index) => (
+          <Card
+            key={index}
+            shadow="md"
+            radius="md"
+            style={{ textAlign: "center" }}
+            padding="xs"
+          >
+            <Stack gap="xs" justify="flex-start">
+              <Button
+                key={index}
+                onClick={() => onPlotSelect(index)}
+                color={selectedPlot === index ? "black" : "gray"}
+              >
+                {plot.name}
+              </Button>
+              <List style={{ textAlign: "left" }}>
+                {[
+                  {
+                    title: SensorDataTitle.TEMPERATURE,
+                    value: plot.data[plot.data.length - 1].temperature,
+                    unit: SensorDataUnit.TEMPERATURE,
+                    getColor: getTemperatureColor,
+                  },
+                  {
+                    title: SensorDataTitle.PH,
+                    value: plot.data[plot.data.length - 1].pH,
+                    unit: "",
+                    getColor: getPHColor,
+                  },
+                  {
+                    title: SensorDataTitle.TDS,
+                    value: plot.data[plot.data.length - 1].tds,
+                    unit: SensorDataUnit.TDS,
+                    getColor: getTDSColor,
+                  },
+                  {
+                    title: SensorDataTitle.WATERLEVEL,
+                    value: plot.data[plot.data.length - 1].waterLevel,
+                    unit: SensorDataUnit.WATERLEVEL,
+                    getColor: getWaterLevelColor,
+                  },
+                ].map((sensorData, i) => (
+                  <List.Item
+                    key={i}
+                    icon={
+                      <Group gap="xs">
+                        <ThemeIcon
+                          color={sensorData.getColor(sensorData.value)}
+                          size={12}
+                          radius="xl"
+                        >
+                          <IconCircle />
+                        </ThemeIcon>
+                        <Text size="md" fw={500}>
+                          {sensorData.title}
+                        </Text>
+                      </Group>
+                    }
+                  >
+                    {`${sensorData.value}${sensorData.title === SensorDataTitle.TEMPERATURE ? sensorData.unit : ` ${sensorData.unit}`}`}
+                  </List.Item>
+                ))}
+              </List>
+            </Stack>
+          </Card>
+        ))}
+      </SimpleGrid>
+    </>
   );
 };
 

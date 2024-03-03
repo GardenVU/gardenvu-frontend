@@ -14,9 +14,9 @@ const History = () => {
   ]);
 
   /** Render **/
-  const plotOptions = testPlotsData.map((plot, index) => ({
+  const plotOptions = testPlotsData.map((plot) => ({
     value: plot._id,
-    label: `Plot ${index + 1}`,
+    label: plot.name,
   }));
 
   return (

@@ -27,7 +27,7 @@ const Graph = ({ data, value, dataKey }: GraphProps) => {
             })`}
       </Title>
       <LineChart
-        h={225}
+        h={200}
         data={data}
         dataKey={dataKey}
         series={[

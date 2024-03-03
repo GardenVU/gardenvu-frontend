@@ -20,7 +20,7 @@ const GraphPanel = ({ data }: GraphPanelProps) => {
 
   /** Render **/
   return (
-    <Grid justify="center" align="center">
+    <Grid justify="center" align="center" mb={10}>
       <Grid.Col span="content">
         <Stack>
           <Button
