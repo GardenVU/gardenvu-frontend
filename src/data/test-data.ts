@@ -5,6 +5,7 @@ import { faker } from "@faker-js/faker";
 export const createTestData = (): SensorData => {
   return {
     _id: faker.number.int({ min: 1, max: 100 }),
+    plot_id: faker.number.int({ min: 1, max: 100 }),
     temperature: faker.number.int({ min: 0, max: 100 }),
     pH: faker.number.float({ min: 0, max: 14, multipleOf: 0.1 }),
     tds: faker.number.int({ min: 250, max: 1000 }),

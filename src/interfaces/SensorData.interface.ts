@@ -1,5 +1,6 @@
 export interface SensorData {
   _id: number;
+  plot_id: number;
   temperature: number;
   pH: number;
   tds: number;
