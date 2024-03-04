@@ -7,6 +7,8 @@ const Dashboard = () => {
   /** States and Context **/
   const [selectedPlot, setSelectedPlot] = useState<number>(0);
 
+  /** Hooks **/
+
   /** Render **/
   return (
     <div>

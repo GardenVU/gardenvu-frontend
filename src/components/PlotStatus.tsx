@@ -93,7 +93,7 @@ const PlotStatus = ({
         value={search}
         onChange={filterPlots}
         placeholder="Search plots"
-        style={{ marginBottom: "0.5rem" }}
+        mb={0.5}
       />
       <SimpleGrid cols={4} spacing="xs" verticalSpacing="xs">
         {filteredPlots.map((plot, index) => (
@@ -107,8 +107,15 @@ const PlotStatus = ({
             <Stack gap="xs" justify="flex-start">
               <Button
                 key={index}
-                onClick={() => onPlotSelect(index)}
-                color={selectedPlot === index ? "black" : "gray"}
+                onClick={() =>
+                  onPlotSelect(plotsData.findIndex((p) => p.name === plot.name))
+                }
+                color={
+                  selectedPlot ===
+                  plotsData.findIndex((p) => p.name === plot.name)
+                    ? "black"
+                    : "gray"
+                }
               >
                 {plot.name}
               </Button>

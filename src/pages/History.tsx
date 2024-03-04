@@ -1,9 +1,10 @@
-import { Group, Select } from "@mantine/core";
+import { Button, Group, Select, Text } from "@mantine/core";
 import { Plot } from "../interfaces/Plot.interface";
 import { useState } from "react";
 import { testPlotsData } from "../data/test-data";
 import { DatePickerInput } from "@mantine/dates";
 import GraphPanel from "../components/GraphPanel";
+import FileSaver from "file-saver";
 
 const History = () => {
   /** States and Context **/
@@ -13,24 +14,36 @@ const History = () => {
     null,
   ]);
 
+  /** Handlers **/
+  const downloadData = () => {
+    const data = selectedPlot?.data || [];
+    const header = Object.keys(data[0]).join(",");
+    const csv = `${header}\n${data
+      .map((row) => Object.values(row).join(","))
+      .join("\n")}`;
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    FileSaver.saveAs(blob, `${selectedPlot?.name}.csv`);
+  };
+
   /** Render **/
   const plotOptions = testPlotsData.map((plot) => ({
-    value: plot._id,
+    value: plot._id.toString(),
     label: plot.name,
   }));
 
   return (
     <div>
-      <Group mb={10} justify="center">
+      <Group mb={20} justify="center">
         <Select
           key={selectedPlot?._id}
           data={plotOptions}
           label="Select plot"
           placeholder="Select plot"
-          value={selectedPlot?._id}
+          value={selectedPlot?._id.toString()}
           onChange={(value) => {
             setSelectedPlot(
-              testPlotsData.find((plot) => plot._id === value) || null,
+              testPlotsData.find((plot) => plot._id.toString() === value) ||
+                null,
             );
           }}
           clearable
@@ -54,7 +67,14 @@ const History = () => {
         />
       </Group>
       {dateRange[0] && dateRange[1] && selectedPlot && (
-        <GraphPanel data={selectedPlot.data} />
+        <>
+          <GraphPanel data={selectedPlot.data} />
+          <Group mt={20} justify="center">
+            <Button onClick={downloadData} color="black">
+              <Text>{`Download Data`}</Text>
+            </Button>
+          </Group>
+        </>
       )}
     </div>
   );

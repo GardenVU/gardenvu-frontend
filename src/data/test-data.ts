@@ -4,7 +4,7 @@ import { faker } from "@faker-js/faker";
 
 export const createTestData = (): SensorData => {
   return {
-    _id: faker.string.uuid(),
+    _id: faker.number.int({ min: 1, max: 100 }),
     temperature: faker.number.int({ min: 0, max: 100 }),
     pH: faker.number.float({ min: 0, max: 14, multipleOf: 0.1 }),
     tds: faker.number.int({ min: 250, max: 1000 }),
@@ -15,7 +15,7 @@ export const createTestData = (): SensorData => {
 
 export const createTestPlotData = (): Plot => {
   return {
-    _id: faker.string.uuid(),
+    _id: faker.number.int({ min: 1, max: 100 }),
     name: faker.word.adjective() + " plot",
     data: Array.from({ length: 20 }, () => createTestData()),
     createdAt: faker.date

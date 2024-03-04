@@ -5,6 +5,7 @@ import "@mantine/charts/styles.css";
 import "@mantine/dates/styles.css";
 import { createTheme, MantineProvider } from "@mantine/core";
 import Router from "./router/router.tsx";
+import { SettingsProvider } from "./context/settings.context.tsx";
 
 const theme = createTheme({
   fontFamily: "Inter, sans-serif",
@@ -14,7 +15,9 @@ const theme = createTheme({
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <MantineProvider theme={theme}>
-      <Router />
+      <SettingsProvider>
+        <Router />
+      </SettingsProvider>
     </MantineProvider>
   </React.StrictMode>,
 );

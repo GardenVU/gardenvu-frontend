@@ -8,6 +8,7 @@ import {
 } from "../interfaces/SensorData.interface";
 import { Group, Title } from "@mantine/core";
 import GraphTooltip from "./GraphTooltip";
+import { useSettingsContext } from "../context/settings.context";
 
 interface GraphProps {
   data: SensorData[];
@@ -16,6 +17,9 @@ interface GraphProps {
 }
 
 const Graph = ({ data, value, dataKey }: GraphProps) => {
+  /** States and Context **/
+  const { curveType } = useSettingsContext();
+
   /** Render **/
   return (
     <Group gap="xs">
@@ -47,7 +51,7 @@ const Graph = ({ data, value, dataKey }: GraphProps) => {
             textTransform: "capitalize",
           },
         }}
-        curveType="step"
+        curveType={curveType}
         tooltipProps={{
           //eslint-disable-next-line @typescript-eslint/no-explicit-any
           content: ({ label, payload }) => (
