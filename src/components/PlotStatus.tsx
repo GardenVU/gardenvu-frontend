@@ -40,6 +40,8 @@ const PlotStatus = ({
   const [filteredPlots, setFilteredPlots] = useState<Plot[]>(plotsData);
 
   /** Render **/
+  const numCols = Math.min(filteredPlots.length, 4);
+
   const filterPlots = (search: string) => {
     setSearch(search);
     setFilteredPlots(
@@ -95,7 +97,7 @@ const PlotStatus = ({
         placeholder="Search plots"
         mb={0.5}
       />
-      <SimpleGrid cols={4} spacing="xs" verticalSpacing="xs">
+      <SimpleGrid cols={numCols} spacing="xs" verticalSpacing="xs">
         {filteredPlots.map((plot, index) => (
           <Card
             key={index}

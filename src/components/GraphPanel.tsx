@@ -69,7 +69,7 @@ const GraphPanel = ({ data }: GraphPanelProps) => {
         <Graph
           data={data}
           value={selected}
-          dataKey={SensorDataName.TIMESTAMP}
+          dataKey={SensorDataName.TIME_COLLECTED}
         />
       </Grid.Col>
     </Grid>

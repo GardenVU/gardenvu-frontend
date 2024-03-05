@@ -1,8 +1,8 @@
 import { SensorData } from "./SensorData.interface";
 
 export interface Plot {
-  _id: number;
+  id: number;
   data: SensorData[];
   name: string;
-  createdAt: string;
+  created_at: string;
 }

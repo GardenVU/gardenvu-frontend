@@ -6,7 +6,7 @@ import {
   SensorDataTitle,
   SensorDataUnit,
 } from "../interfaces/SensorData.interface";
-import { Group, Title } from "@mantine/core";
+import { Group, Text, Title } from "@mantine/core";
 import GraphTooltip from "./GraphTooltip";
 import { useSettingsContext } from "../context/settings.context";
 
@@ -30,35 +30,39 @@ const Graph = ({ data, value, dataKey }: GraphProps) => {
               SensorDataUnit[value.toUpperCase() as keyof typeof SensorDataUnit]
             })`}
       </Title>
-      <LineChart
-        h={200}
-        data={data}
-        dataKey={dataKey}
-        series={[
-          {
-            name: value,
-            color:
-              SensorDataColors[
-                value.toUpperCase() as keyof typeof SensorDataColors
-              ],
-          },
-        ]}
-        xAxisProps={{
-          tickCount: data.length,
-          tickFormatter: (value: string) =>
-            new Date(value).toLocaleTimeString(),
-          style: {
-            textTransform: "capitalize",
-          },
-        }}
-        curveType={curveType}
-        tooltipProps={{
-          //eslint-disable-next-line @typescript-eslint/no-explicit-any
-          content: ({ label, payload }) => (
-            <GraphTooltip label={label} payload={payload} />
-          ),
-        }}
-      />
+      {data.length === 0 ? (
+        <Text>{`No Data Available!`}</Text>
+      ) : (
+        <LineChart
+          h={200}
+          data={data}
+          dataKey={dataKey}
+          series={[
+            {
+              name: value,
+              color:
+                SensorDataColors[
+                  value.toUpperCase() as keyof typeof SensorDataColors
+                ],
+            },
+          ]}
+          xAxisProps={{
+            tickCount: data.length,
+            tickFormatter: (value: string) =>
+              new Date(value).toLocaleTimeString(),
+            style: {
+              textTransform: "capitalize",
+            },
+          }}
+          curveType={curveType}
+          tooltipProps={{
+            //eslint-disable-next-line @typescript-eslint/no-explicit-any
+            content: ({ label, payload }) => (
+              <GraphTooltip label={label} payload={payload} />
+            ),
+          }}
+        />
+      )}
     </Group>
   );
 };

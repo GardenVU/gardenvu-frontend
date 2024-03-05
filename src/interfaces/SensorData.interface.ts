@@ -1,11 +1,11 @@
 export interface SensorData {
-  _id: number;
+  id: number;
   plot_id: number;
   temperature: number;
   pH: number;
   tds: number;
   waterLevel: number;
-  timestamp: string;
+  time_collected: string;
 }
 
 export enum SensorDataName {
@@ -13,7 +13,7 @@ export enum SensorDataName {
   PH = "pH",
   TDS = "tds",
   WATERLEVEL = "waterLevel",
-  TIMESTAMP = "timestamp",
+  TIME_COLLECTED = "time_collected",
 }
 
 export enum SensorDataUnit {
