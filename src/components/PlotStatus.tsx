@@ -125,25 +125,27 @@ const PlotStatus = ({
                 {[
                   {
                     title: SensorDataTitle.TEMPERATURE,
-                    value: plot.data[plot.data.length - 1].temperature,
+                    value:
+                      plot.sensorData[plot.sensorData.length - 1].temperature,
                     unit: SensorDataUnit.TEMPERATURE,
                     getColor: getTemperatureColor,
                   },
                   {
                     title: SensorDataTitle.PH,
-                    value: plot.data[plot.data.length - 1].pH,
+                    value: plot.sensorData[plot.sensorData.length - 1].pH,
                     unit: "",
                     getColor: getPHColor,
                   },
                   {
                     title: SensorDataTitle.TDS,
-                    value: plot.data[plot.data.length - 1].tds,
+                    value: plot.sensorData[plot.sensorData.length - 1].tds,
                     unit: SensorDataUnit.TDS,
                     getColor: getTDSColor,
                   },
                   {
                     title: SensorDataTitle.WATERLEVEL,
-                    value: plot.data[plot.data.length - 1].waterLevel,
+                    value:
+                      plot.sensorData[plot.sensorData.length - 1].waterLevel,
                     unit: SensorDataUnit.WATERLEVEL,
                     getColor: getWaterLevelColor,
                   },

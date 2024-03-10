@@ -9,10 +9,10 @@ import Graph from "./Graph";
 import { useState } from "react";
 
 interface GraphPanelProps {
-  data: SensorData[];
+  sensorData: SensorData[];
 }
 
-const GraphPanel = ({ data }: GraphPanelProps) => {
+const GraphPanel = ({ sensorData }: GraphPanelProps) => {
   /** States and Context **/
   const [selected, setSelected] = useState<SensorDataName>(
     SensorDataName.TEMPERATURE,
@@ -67,7 +67,7 @@ const GraphPanel = ({ data }: GraphPanelProps) => {
       </Grid.Col>
       <Grid.Col span={9}>
         <Graph
-          data={data}
+          data={sensorData}
           value={selected}
           dataKey={SensorDataName.TIME_COLLECTED}
         />
