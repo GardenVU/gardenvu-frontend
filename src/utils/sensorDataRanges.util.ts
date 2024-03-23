@@ -22,14 +22,6 @@ export const tdsRange = {
   ],
 };
 
-export const waterLevelRange = {
-  good: { min: 10, max: 15 },
-  warn: [
-    { min: 5, max: 10 },
-    { min: 15, max: 20 },
-  ],
-};
-
 export enum SensorDateRangeColor {
   GOOD = "green",
   WARN = "yellow",

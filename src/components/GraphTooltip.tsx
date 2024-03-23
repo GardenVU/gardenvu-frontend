@@ -28,7 +28,7 @@ const GraphTooltip = ({ label, payload }: GraphTooltipProps) => {
             ]
           }
           :{" "}
-          {`${item.value}${["WATERLEVEL", "TDS"].includes(item.name.toUpperCase()) ? " " : ""}${SensorDataUnit[item.name.toUpperCase() as keyof typeof SensorDataTitle]}`}
+          {`${item.value}${["TDS"].includes(item.name.toUpperCase()) ? " " : ""}${SensorDataUnit[item.name.toUpperCase() as keyof typeof SensorDataTitle]}`}
         </Text>
       ))}
     </Paper>

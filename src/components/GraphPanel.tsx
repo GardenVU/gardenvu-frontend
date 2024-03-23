@@ -53,16 +53,6 @@ const GraphPanel = ({ sensorData }: GraphPanelProps) => {
           >
             {SensorDataTitle.TDS}
           </Button>
-          <Button
-            onClick={() => setSelected(SensorDataName.WATERLEVEL)}
-            color={
-              selected === SensorDataName.WATERLEVEL
-                ? SensorDataColors.WATERLEVEL
-                : SensorDataColors.DEFAULT
-            }
-          >
-            {SensorDataTitle.WATERLEVEL}
-          </Button>
         </Stack>
       </Grid.Col>
       <Grid.Col span={9}>
