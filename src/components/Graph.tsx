@@ -57,7 +57,7 @@ const Graph = ({ data, value, dataKey }: GraphProps) => {
           yAxisProps={{
             tickCount: 5,
             tickFormatter: (value: number) => value.toFixed(2),
-            domain: ['auto', 'auto'],
+            domain: ["auto", "auto"],
           }}
           curveType={curveType}
           tooltipProps={{
