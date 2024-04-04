@@ -65,6 +65,8 @@ const History = () => {
     enabled: !!selectedPlot && dateRange[0] !== null && dateRange[1] !== null,
   });
 
+  console.log(historyData);
+
   /** Render **/
   const plotOptions = plotInfo?.map((plot: Plot) => ({
     value: plot.id.toString(),
@@ -115,12 +117,20 @@ const History = () => {
       </Group>
       {dateRange[0] && dateRange[1] && selectedPlot && historyData && (
         <>
-          <GraphPanel data={historyData} />
-          <Group mt={20} justify="center">
-            <Button onClick={downloadData} color="black">
-              <Text>{`Download Data`}</Text>
-            </Button>
-          </Group>
+          {historyData.length === 0 ? (
+            <Group mt={20} justify="center">
+              <Text>{`No data available for the selected date range.`}</Text>
+            </Group>
+          ) : (
+            <>
+              <GraphPanel sensorData={historyData} />
+              <Group mt={20} justify="center">
+                <Button onClick={downloadData} color="black">
+                  <Text>{`Download Data`}</Text>
+                </Button>
+              </Group>
+            </>
+          )}
         </>
       )}
     </>

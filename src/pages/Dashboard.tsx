@@ -59,7 +59,7 @@ const Dashboard = () => {
     <>
       {plotData.length > 0 && (
         <>
-          <GraphPanel data={plotData[selectedPlot].data} />
+          <GraphPanel sensorData={plotData[selectedPlot].sensorData} />
           <PlotStatus
             plotsData={plotData}
             selectedPlot={selectedPlot}

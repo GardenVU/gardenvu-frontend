@@ -34,7 +34,7 @@ const Graph = ({ data, value, dataKey }: GraphProps) => {
         <Text>{`No Data Available!`}</Text>
       ) : (
         <LineChart
-          h={200}
+          h={225}
           data={data}
           dataKey={dataKey}
           series={[
@@ -53,6 +53,11 @@ const Graph = ({ data, value, dataKey }: GraphProps) => {
             style: {
               textTransform: "capitalize",
             },
+          }}
+          yAxisProps={{
+            tickCount: 5,
+            tickFormatter: (value: number) => value.toFixed(2),
+            domain: ['auto', 'auto'],
           }}
           curveType={curveType}
           tooltipProps={{

@@ -18,7 +18,6 @@ import {
   temperatureRange,
   phRange,
   tdsRange,
-  waterLevelRange,
   SensorDateRangeColor,
 } from "../utils/sensorDataRanges.util";
 import { IconCircle } from "@tabler/icons-react";
@@ -83,11 +82,6 @@ const PlotStatus = ({
     return getColorByRange(tds, range);
   };
 
-  const getWaterLevelColor = (waterLevel: number) => {
-    const range = { good: waterLevelRange.good, warn: waterLevelRange.warn };
-    return getColorByRange(waterLevel, range);
-  };
-
   return (
     <>
       <Autocomplete
@@ -115,7 +109,7 @@ const PlotStatus = ({
                 color={
                   selectedPlot ===
                   plotsData.findIndex((p) => p.name === plot.name)
-                    ? "black"
+                    ? "blue"
                     : "gray"
                 }
               >
@@ -125,27 +119,22 @@ const PlotStatus = ({
                 {[
                   {
                     title: SensorDataTitle.TEMPERATURE,
-                    value: plot.data[plot.data.length - 1].temperature,
+                    value:
+                      plot.sensorData[plot.sensorData.length - 1].temperature,
                     unit: SensorDataUnit.TEMPERATURE,
                     getColor: getTemperatureColor,
                   },
                   {
                     title: SensorDataTitle.PH,
-                    value: plot.data[plot.data.length - 1].pH,
+                    value: plot.sensorData[plot.sensorData.length - 1].pH,
                     unit: "",
                     getColor: getPHColor,
                   },
                   {
                     title: SensorDataTitle.TDS,
-                    value: plot.data[plot.data.length - 1].tds,
+                    value: plot.sensorData[plot.sensorData.length - 1].tds,
                     unit: SensorDataUnit.TDS,
                     getColor: getTDSColor,
-                  },
-                  {
-                    title: SensorDataTitle.WATERLEVEL,
-                    value: plot.data[plot.data.length - 1].waterLevel,
-                    unit: SensorDataUnit.WATERLEVEL,
-                    getColor: getWaterLevelColor,
                   },
                 ].map((sensorData, i) => (
                   <List.Item

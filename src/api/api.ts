@@ -1,8 +1,7 @@
 import axios from "axios";
 import { Plot } from "../interfaces/Plot.interface";
 import { SensorData } from "../interfaces/SensorData.interface";
-
-const API_URL = "http://localhost/gardenvu";
+import { API_URL } from "../utils/constants.util";
 
 /**
  * Retrieves plot information from the API.

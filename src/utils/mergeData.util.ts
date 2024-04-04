@@ -27,7 +27,7 @@ export const mergeData = (
     if (sensorData) {
       return {
         ...plot,
-        data: sensorData,
+        sensorData: sensorData as SensorData[],
       };
     }
     return plot;
